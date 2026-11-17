@@ -1,7 +1,60 @@
 const { isEqual } = require("./isEqual");
 
-const primitiveTestCases = {
-    type: "primitiveTestCases",
+const nullTestCases = {
+    type: "nullTestCases",
+    cases: [
+        ["both null should be true", null, null, true],
+        ["both not null should be false", 10, null, false],
+        ["null and string should be false", null, "hi", false],
+        ["null and array should be false", null, [], false],
+        ["null and onject should be false", null, {}, false],
+    ]
+}
+
+const undefinedTestCases = {
+    type: "undefinedTestCases",
+    cases: [
+        ["both undefined should be true", undefined, undefined, true],
+        ["both not undefined should be false", 10, undefined, false],
+        ["undefined and string should be false", undefined, "hi", false],
+        ["undefined , array should be false", undefined, [true], false],
+        ["undefined , object should be false", undefined, { x: true }, false],
+    ]
+}
+
+const NaNTestCases = {
+    type: "NaNTestCases",
+    cases: [
+        ["NaN and number should be false", NaN, 0, false],
+        ["two NAN should be true", NaN, NaN, true],
+        ["NaN and string should be false", NaN, "hi", false],
+        ["NaN , array should be false", NaN, [true], false],
+        ["NaN , object should be false", NaN, { x: true }, false],
+    ]
+}
+
+const stringTestCases = {
+    type: "stringTestCases",
+    cases: [
+        ["Same Strings should be true", "a", "a", true],
+        ["Diff Strings should be false", "a", "b", false],
+        ["String , array should be false", "hi", [10], false],
+        ["String , object should be false", "hi", { x: "hi" }, false],
+    ]
+}
+
+const booleanTestCases = {
+    type: "booleanTestCases",
+    cases: [
+        ["boolean  opp should be false", true, false, false],
+        ["boolean same should be true", true, true, true],
+        ["boolean , array should be false", true, [true], false],
+        ["boolean , object should be false", true, { x: true }, false],
+    ]
+}
+
+const numberTestCases = {
+    type: "numberTestCases",
     cases: [
         ["Positive Same Numbers should be true", 1, 1, true],
         ["Negative Same Numbers should be true", -10, -10, true],
@@ -9,32 +62,8 @@ const primitiveTestCases = {
         ["one number and one boolean should be false", 1, false, false],
         ["number , array should be false", 10, [true], false],
         ["number , object should be false", 10, { x: true }, false],
-
-        ["boolean  opp should be false", true, false, false],
-        ["boolean same should be true", true, true, true],
-        ["boolean , array should be false", true, [true], true],
-        ["boolean , object should be false", true, { x: true }, true],
-
-        ["Same Strings should be true", "a", "a", true],
-        ["Diff Strings should be false", "a", "b", false],
-        ["String , array should be false", "hi", [10], false],
-        ["String , object should be false", "hi", { x: "hi" }, false],
-
-        ["NaN and number should be false", NaN, 0, false],
-        ["two NAN should be true", NaN, NaN, true],
-        ["NaN and string should be false", NaN, "hi", false],
-        ["NaN , array should be false", NaN, [true], true],
-        ["NaN , object should be false", NaN, { x: true }, true],
-
-        ["both undefined should be true", undefined, undefined, true],
-        ["both not undefined should be false", 10, undefined, false],
-
-        ["both null should be true", null, null, true],
-        ["both not null should be false", 10, null, false],
-        ["null and array should be false", null, [], false],
-        ["null and onject should be false", null, {}, false],
-
-        ["diff primitive should be false", 1, "1", false],
+        ["number and string should be false", 1, "1", false],
+        ["number and boolean should be false", 1, true, false],
     ]
 }
 
@@ -86,7 +115,12 @@ const nestedObjectTestCases = {
 }
 
 const testCases = [
-    primitiveTestCases,
+    numberTestCases,
+    booleanTestCases,
+    stringTestCases,
+    undefinedTestCases,
+    NaNTestCases,
+    nullTestCases,
     arrayTestCases,
     nestedArrayTestCases,
     objectTestCases,
@@ -96,10 +130,11 @@ const testCases = [
 function runTests(testCases) {
     let count = testCases.cases.length;
 
-    console.log(`\n`, testCases.type, `\n`);
+    console.log(`\n`, testCases.type,);
 
     for (const [description, first, second, expected] of testCases.cases) {
         const result = isEqual(first, second);
+
         if (!(result === expected)) {
             console.log(`❌`, description);
             count--;
@@ -113,6 +148,8 @@ function runTests(testCases) {
         console.log(`✅ all are working`);
     else if (count !== 0)
         console.log(`✅ other ${count} are working`);
+    else
+        console.log(`None of them are working`);
 }
 
 function runAllCases(allCases) {

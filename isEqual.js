@@ -7,7 +7,7 @@ function getObjLength(a) {
 }
 
 function getType(a) {
-  // if (typeof a === "undefined") return "undefined";
+  if (typeof a === "undefined") return "undefined";
   if (a === null) return "null";
   if (Number.isNaN(a)) return "NaN";
   return Array.isArray(a) ? "array" : typeof a;
