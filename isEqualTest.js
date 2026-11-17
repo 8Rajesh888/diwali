@@ -7,15 +7,24 @@ const primitiveTestCases = {
         ["Negative Same Numbers should be true", -10, -10, true],
         ["diff Positive Numbers should be false", 1, 0, false],
         ["one number and one boolean should be false", 1, false, false],
+        ["number , array should be false", 10, [true], false],
+        ["number , object should be false", 10, { x: true }, false],
 
         ["boolean  opp should be false", true, false, false],
         ["boolean same should be true", true, true, true],
+        ["boolean , array should be false", true, [true], true],
+        ["boolean , object should be false", true, { x: true }, true],
 
         ["Same Strings should be true", "a", "a", true],
         ["Diff Strings should be false", "a", "b", false],
+        ["String , array should be false", "hi", [10], false],
+        ["String , object should be false", "hi", { x: "hi" }, false],
 
-        ["one NAN should be false", NaN, 0, false],
+        ["NaN and number should be false", NaN, 0, false],
         ["two NAN should be true", NaN, NaN, true],
+        ["NaN and string should be false", NaN, "hi", false],
+        ["NaN , array should be false", NaN, [true], true],
+        ["NaN , object should be false", NaN, { x: true }, true],
 
         ["both undefined should be true", undefined, undefined, true],
         ["both not undefined should be false", 10, undefined, false],
@@ -38,6 +47,8 @@ const arrayTestCases = {
         ["diff length more in b should be be false", [1], [1, 2], false],
         ["diff length more in a should be be false", [1, 2], [1], false],
         ["diff length ,one empty should be be false", [], [1, 2], false],
+        ["array , object diff keys should be false", [10], { x: 10 }, false],
+        ["array , object same keys should be false", [10], { 0: 10 }, false],
     ]
 }
 
@@ -93,15 +104,15 @@ function runTests(testCases) {
             console.log(`❌`, description);
             count--;
         }
-        else {
-            console.log(`✅ `, description);
-        }
+        // else {
+        //     console.log(`✅ `, description);
+        // }
     }
 
-    // if (count === testCases.cases.length)
-    //     console.log(`✅ all are working`);
-    // else if (count !== 0)
-    //     console.log(`✅ other ${count} are working`);
+    if (count === testCases.cases.length)
+        console.log(`✅ all are working`);
+    else if (count !== 0)
+        console.log(`✅ other ${count} are working`);
 }
 
 function runAllCases(allCases) {
