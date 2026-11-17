@@ -11,64 +11,66 @@ const primitiveTestCases = {
         ["boolean  opp should be false", true, false, false],
         ["boolean same should be true", true, true, true],
 
-        ["Same Strings", "a", "a", true],
-        ["Diff Strings", "a", "b", false],
+        ["Same Strings should be true", "a", "a", true],
+        ["Diff Strings should be false", "a", "b", false],
 
-        ["one NAN", NaN, 0, false],
-        ["two NAN", NaN, NaN, true],
+        ["one NAN should be false", NaN, 0, false],
+        ["two NAN should be true", NaN, NaN, true],
 
-        ["both undefined", undefined, undefined, true],
-        ["both not undefined", 10, undefined, false],
+        ["both undefined should be true", undefined, undefined, true],
+        ["both not undefined should be false", 10, undefined, false],
 
-        ["both null", null, null, true],
-        ["both not null", 10, null, false],
+        ["both null should be true", null, null, true],
+        ["both not null should be false", 10, null, false],
+        ["null and array should be false", null, [], false],
+        ["null and onject should be false", null, {}, false],
 
-        ["diff primitive", 1, "1", false],
+        ["diff primitive should be false", 1, "1", false],
     ]
 }
 
 const arrayTestCases = {
     type: "arrayTestCases",
     cases: [
-        ["Empty Array", [], [], true],
-        ["same Length same values", [1], [1], true],
-        ["same Length diff values", [1], [2], false],
-        ["diff length more in b", [1], [1, 2], false],
-        ["diff length more in a", [1, 2], [1], false],
-        ["diff length ,one empty", [], [1, 2], false],
+        ["Empty Array should be true", [], [], true],
+        ["same Length same values should be true", [1], [1], true],
+        ["same Length diff values should be be false", [1], [2], false],
+        ["diff length more in b should be be false", [1], [1, 2], false],
+        ["diff length more in a should be be false", [1, 2], [1], false],
+        ["diff length ,one empty should be be false", [], [1, 2], false],
     ]
 }
 
 const nestedArrayTestCases = {
     type: "nestedArrayTestCases",
     cases: [
-        ["both nested Empty Array", [[]], [[]], true],
-        [" one nested Empty Array", [[]], [1], false],
-        ["diff length more than 0", [1, [1, 2]], [1, 2], false],
-        ["diff length ,one with 0", [1, []], [1, [1, 2]], false],
+        ["both nested Empty Array should be true", [[]], [[]], true],
+        [" one nested Empty Array should be be false", [[]], [1], false],
+        ["diff length more than 0 should be be false", [1, [1, 2]], [1, 2], false],
+        ["diff length ,one with 0 should be be false", [1, []], [1, [1, 2]], false],
     ]
 }
 
 const objectTestCases = {
     type: "objectTestCases",
     cases: [
-        ["Empty objects", {}, {}, true],
-        ["one object", { a: 1 }, {}, false],
-        ["same obj", { a: 1 }, { a: 1 }, true],
-        ["diff obj", { a: 1 }, { a: 2 }, false],
-        ["reversed obj", { a: 1, b: 2 }, { b: 2, a: 1 }, true],
-        ["a is first", { a: undefined }, { b: 1 }, false],
-        ["a is second", { b: 1 }, { a: undefined }, false],
+        ["Empty objects should be true", {}, {}, true],
+        ["one object should be be false", { a: 1 }, {}, false],
+        ["same obj should be true", { a: 1 }, { a: 1 }, true],
+        ["diff obj should be be false", { a: 1 }, { a: 2 }, false],
+        ["reversed obj should be true", { a: 1, b: 2 }, { b: 2, a: 1 }, true],
+        ["a is first should be be false", { a: undefined }, { b: 1 }, false],
+        ["a is second should be be false", { b: 1 }, { a: undefined }, false],
     ]
 }
 
 const nestedObjectTestCases = {
     type: "nestedObjectTestCases",
     cases: [
-        ["same obj in array", [{ a: [1] }], [{ a: [1] }], true],
-        ["same array in obj", { a: [1] }, { a: [1] }, true],
-        ["diff obj in array", [{ a: [1] }], [{ a: [1], b: 2 }], false],
-        ["diff array in obj", { a: [1] }, { a: [1], b: [2] }, false],
+        ["same obj in array should be true", [{ a: [1] }], [{ a: [1] }], true],
+        ["same array in obj should be true", { a: [1] }, { a: [1] }, true],
+        ["diff obj in array should be be false", [{ a: [1] }], [{ a: [1], b: 2 }], false],
+        ["diff array in obj should be be false", { a: [1] }, { a: [1], b: [2] }, false],
     ]
 }
 

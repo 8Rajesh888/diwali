@@ -1,12 +1,12 @@
 function areBothEqual(a, b) {
-  return a === b
+  return a === b;
 }
 
 function getObjLength(a) {
   return Object.keys(a).length;
 }
 
-function type(a) {
+function getType(a) {
   if (typeof a === "undefined") return "undefined";
   if (a === null) return "null";
   if (Number.isNaN(a)) return "NaN";
@@ -14,7 +14,7 @@ function type(a) {
 }
 
 function areTypesEqual(a, b) {
-  return type(a) === type(b)
+  return getType(a) === getType(b);
 }
 
 function areObjectsEqual(a, b) {
@@ -23,23 +23,22 @@ function areObjectsEqual(a, b) {
     if (!(key in b)) return false;
     if (!isEqual(a[key], b[key])) return false;
   }
-  return true
+  return true;
 }
 
 function isEqual(a, b) {
   if (!areTypesEqual(a, b)) return false;
-  switch (type(a)) {
-    case "number": return areBothEqual(a, b);
-    case "boolean": return areBothEqual(a, b);
-    case "string": return areBothEqual(a, b);
-    case "array": return areObjectsEqual(a, b);
-    case "object": return areObjectsEqual(a, b);
-    case "undefined": return areBothEqual(a, b);
-    case "NaN": return true;
-    case "null": return areBothEqual(a, b);
+  switch (getType(a)) {
+    case "array":
+      return areObjectsEqual(a, b);
+    case "object":
+      return areObjectsEqual(a, b);
+    case "NaN":
+      return true;
   }
+  return areBothEqual(a, b);
 }
 
 module.exports = {
-  isEqual
-}
+  isEqual,
+};
