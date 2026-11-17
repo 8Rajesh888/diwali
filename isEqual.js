@@ -1,30 +1,45 @@
-function isOnlyOneArray(first, second) {
-  return Array.isArray(first) !== Array.isArray(second);
+function areBothEqual(a, b) {
+  return a === b
 }
 
-function getObjectLength(first) {
-  return Object.keys(first).length;
+function getObjLength(a) {
+  return Object.keys(a).length;
 }
 
-function hasSameLength(first, second) {
-  return getObjectLength(first) !== getObjectLength(second);
+function type(a) {
+  return Array.isArray(a) ? "array" : typeof a;
 }
 
-function isEqual(first, second) {
-  if (first === second) return true;
+function areTypesEqual(a, b) {
+  return type(a) === type(b)
+}
 
-  if (typeof first !== "object" || typeof second !== "object") return false;
-
-  if (hasSameLength(first, second)) return false;
-
-  if (isOnlyOneArray(first, second)) return false;
-
-  for (const key in first) {
-    if (!(key in second)) return false;
-    if (!isEqual(first[key], second[key])) return false;
+function areArraysEqual(a, b) {
+  if (a.length !== b.length) return false;
+  for (let index = 0; index < a.length; index++) {
+    if (!isEqual(a[index], b[index])) return false;
   }
+  return true
+}
 
-  return true;
+function areObjectsEqual(a, b) {
+  if (getObjLength(a) !== getObjLength(b)) return false;
+  for (const key in a) {
+    if (!(key in b)) return false;
+    if (!isEqual(a[key], b[key])) return false;
+  }
+  return true
+}
+
+function isEqual(a, b) {
+  if (!areTypesEqual(a, b)) return false;
+  switch (type(a)) {
+    case "number": return areBothEqual(a, b);
+    case "boolean": return areBothEqual(a, b);
+    case "string": return areBothEqual(a, b);
+    case "array": return areArraysEqual(a, b);
+    case "object": return areObjectsEqual(a, b);
+  }
 }
 
 module.exports = {
