@@ -14,12 +14,14 @@ const primitiveTestCases = {
         ["Same Strings", "a", "a", true],
         ["Diff Strings", "a", "b", false],
 
-        // ["one NAN", NaN, 0, false],
-        // ["two NAN", NaN, NaN, true],
-        // ["both undefined", undefined, undefined, true],
-        // ["both not undefined", 10, undefined, false],
-        // ["both null", null, null, true],
-        // ["both not null", 10, null, false],
+        ["one NAN", NaN, 0, false],
+        ["two NAN", NaN, NaN, true],
+
+        ["both undefined", undefined, undefined, true],
+        ["both not undefined", 10, undefined, false],
+
+        ["both null", null, null, true],
+        ["both not null", 10, null, false],
 
         ["diff primitive", 1, "1", false],
     ]
@@ -75,7 +77,7 @@ const testCases = [
     arrayTestCases,
     nestedArrayTestCases,
     objectTestCases,
-    // nestedObjectTestCases,
+    nestedObjectTestCases,
 ];
 
 function runTests(testCases) {

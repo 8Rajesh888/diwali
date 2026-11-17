@@ -7,19 +7,14 @@ function getObjLength(a) {
 }
 
 function type(a) {
+  if (typeof a === "undefined") return "undefined";
+  if (a === null) return "null";
+  if (Number.isNaN(a)) return "NaN";
   return Array.isArray(a) ? "array" : typeof a;
 }
 
 function areTypesEqual(a, b) {
   return type(a) === type(b)
-}
-
-function areArraysEqual(a, b) {
-  if (a.length !== b.length) return false;
-  for (let index = 0; index < a.length; index++) {
-    if (!isEqual(a[index], b[index])) return false;
-  }
-  return true
 }
 
 function areObjectsEqual(a, b) {
@@ -37,8 +32,11 @@ function isEqual(a, b) {
     case "number": return areBothEqual(a, b);
     case "boolean": return areBothEqual(a, b);
     case "string": return areBothEqual(a, b);
-    case "array": return areArraysEqual(a, b);
+    case "array": return areObjectsEqual(a, b);
     case "object": return areObjectsEqual(a, b);
+    case "undefined": return areBothEqual(a, b);
+    case "NaN": return true;
+    case "null": return areBothEqual(a, b);
   }
 }
 
