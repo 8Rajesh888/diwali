@@ -2,7 +2,7 @@ function checkGrid(grid) {
   if (grid.length === 0) return true;
   const length = grid[0].length;
   for (const r of grid) {
-    if (! Array.isArray(r) ||r.length !== length)
+    if (!Array.isArray(r) || r.length !== length)
       return true;
   }
   return false;
@@ -10,20 +10,20 @@ function checkGrid(grid) {
 
 function doFloodFill(grid, row, col, newVal, oldVal) {
   if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || grid[row][col] !== oldVal || oldVal === newVal) {
-    return ;
+    return;
   }
-  
+
   grid[row][col] = newVal;
   doFloodFill(grid, row + 1, col, newVal, oldVal);
   doFloodFill(grid, row - 1, col, newVal, oldVal);
   doFloodFill(grid, row, col + 1, newVal, oldVal);
   doFloodFill(grid, row, col - 1, newVal, oldVal);
-  return ;
+  return;
 }
 
 function floodFill(grid, row, col, newVal, oldVal) {
   if (Grid(grid)) return grid;
-  
+
   doFloodFill(grid, row, col, newVal, oldVal);
   return grid;
 }

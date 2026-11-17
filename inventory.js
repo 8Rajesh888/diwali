@@ -29,7 +29,7 @@ function inventoryLogProcessor(initStock, transactions) {
         break;
 
       default:
-        console.log(`Ignored unknown transaction type: "${type}"`);
+        console.log(`Unknown transaction type: "${type}"`);
     }
   }
 

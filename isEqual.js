@@ -1,32 +1,32 @@
-function isEqual(first, second) {
-  if (typeof first !== typeof second) {
-    return false
-  }
-  {
-    if (typeof first === 'object' && first !== null && typeof second === 'object' && second !== null) {
-      const fEntries = Object.entries(first)
-      const sEntries = Object.entries(second)
-      const length = fEntries.length > sEntries.length ?
-        fEntries.length : sEntries.length;
-      for (let i = 0; i < length; i++) {
-        if (fEntries[i] === undefined || sEntries[i] === undefined || fEntries[i][0] !== sEntries[i][0] ||
-          fEntries[i][1] != sEntries[i][1]
-        ) {
-          return false
-        }
-      }
-      
-    }
-    return true
-  }
-  
-  if (first !== second) {
-    return false
-  }
-  return true
+function isOnlyOneArray(first, second) {
+  return Array.isArray(first) !== Array.isArray(second);
 }
 
-console.log(isEqual([1], [1, 2]))
+function getObjectLength(first) {
+  return Object.keys(first).length;
+}
 
-{a: 10 ,b:  5}
-{b:  5,a : 10}
+function hasSameLength(first, second) {
+  return getObjectLength(first) !== getObjectLength(second);
+}
+
+function isEqual(first, second) {
+  if (first === second) return true;
+
+  if (typeof first !== "object" || typeof second !== "object") return false;
+
+  if (hasSameLength(first, second)) return false;
+
+  if (isOnlyOneArray(first, second)) return false;
+
+  for (const key in first) {
+    if (!(key in second)) return false;
+    if (!isEqual(first[key], second[key])) return false;
+  }
+
+  return true;
+}
+
+module.exports = {
+  isEqual
+}
