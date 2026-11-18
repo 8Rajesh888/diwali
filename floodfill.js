@@ -22,11 +22,12 @@ function doFloodFill(grid, row, col, newVal, oldVal) {
 }
 
 function floodFill(grid, row, col, newVal, oldVal) {
-  if (Grid(grid)) return grid;
+  if (checkGrid(grid)) return grid;
 
   doFloodFill(grid, row, col, newVal, oldVal);
   return grid;
 }
+
 /*
 const grid = [
   [1, 1, 1, 1, 1],
@@ -53,7 +54,7 @@ const grid = [
   [0, 0, 0, 0],
   [0, 2, 2, 0],
   [0, 2, 0, 0],
-  [0, 0, 0, 0]
+  [0, 0, 0, 2]
 ];
 
 console.log(floodFill(grid, 1, 1, 3, grid[1][1]));

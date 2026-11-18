@@ -35,6 +35,8 @@ function isEqual(a, b) {
       return areObjectsEqual(a, b);
     case "NaN":
       return true;
+    case "null":
+      return true;
   }
   return areBothEqual(a, b);
 }
